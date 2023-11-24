@@ -66,8 +66,7 @@ const r16Schema = new mongoose.Schema(
                 type: String
             },
             date: {
-                type: String,
-                required: true
+                type: String
             }
         },
         professorComment: {
@@ -77,8 +76,7 @@ const r16Schema = new mongoose.Schema(
             },
             approve: {
                 type: Boolean,
-                default: true,
-                required: true
+                default: true
             },
             because: {
                 type: String
@@ -101,8 +99,7 @@ const r16Schema = new mongoose.Schema(
                 type: String
             },
             date: {
-                type: String,
-                required: true
+                type: String
             }
         }
     },

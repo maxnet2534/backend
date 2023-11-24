@@ -70,8 +70,7 @@ const r11Schema = new mongoose.Schema(
                 type: String
             },
             date: {
-                type: String,
-                required: true
+                type: String
             }
         },
         headDepartment: {
@@ -83,8 +82,7 @@ const r11Schema = new mongoose.Schema(
                 type: String
             },
             date: {
-                type: String,
-                required: true
+                type: String
             }
         },
         deanConsideration: {
@@ -94,8 +92,7 @@ const r11Schema = new mongoose.Schema(
             },
             approve: {
                 type: Boolean,
-                default: true,
-                required: true
+                default: true
             },
             because:{
                 type: String
@@ -115,12 +112,10 @@ const r11Schema = new mongoose.Schema(
             },
             runtime: {
                 minute: {
-                    type: String,
-                    required: true
+                    type: String
                 },
                 day: {
-                    type: String,
-                    required: true
+                    type: String
                 }
             }
         }

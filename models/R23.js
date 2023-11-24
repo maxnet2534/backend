@@ -17,7 +17,7 @@ const r23Schema = new mongoose.Schema(
             required: true
         },
         /*  */
-        text: {    
+        text: {
             title: {
                 type: String,
                 required: true

@@ -50,8 +50,7 @@ const r01Schema = new mongoose.Schema(
                 type: String
             },
             date: {
-                type: String,
-                required: true
+                type: String
             }
         },
         headDepartment: {
