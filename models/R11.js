@@ -7,7 +7,7 @@ const r11Schema = new mongoose.Schema(
             required: true,
             ref: "User"
         },
-        title: {
+        docType: {
             type: String,
             required: true
         },
@@ -54,6 +54,53 @@ const r11Schema = new mongoose.Schema(
         date: {
             type: String,
             required: true
+        },
+        advisor: {
+            comment:{
+                type: String
+            },
+            date: {
+                type: String,
+                required: true
+            }
+        },
+        headDepartment: {
+            comment:{
+                type: String
+            },
+            date: {
+                type: String,
+                required: true
+            }
+        },
+        deanConsideration: {
+            approve: {
+                type: Boolean,
+                default: true,
+                required: true
+            },
+            because:{
+                type: String
+            }
+        },
+        registerOffice: {
+            request: {
+                type: Boolean,
+                default: true
+            },
+            because: {
+                type: String
+            },
+            runtime: {
+                minute: {
+                    type: String,
+                    required: true
+                },
+                day: {
+                    type: String,
+                    required: true
+                }
+            }
         }
     },
     {
@@ -61,4 +108,4 @@ const r11Schema = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('R11', r11Schema)
+module.exports = mongoose.model('Documents', r11Schema)

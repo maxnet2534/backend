@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
 
-const r16Schema = new mongoose.Schema(
+const r23Schema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: "User"
         },
-        docType: {
+        typeDoc: {
+            type: String,
+            required: true
+        },
+        title: {
             type: String,
             required: true
         },
@@ -16,74 +20,73 @@ const r16Schema = new mongoose.Schema(
             required: true
         },
         text: {    
-            courseId: {
+            theLecturerOf: {
                 type: String,
                 required: true
             },
-            courseTitle: {
+            classLevel: {
                 type: String,
                 required: true
             },
-            group: {
+            durationOfStudy: {
+                type: String,
+                required: true
+            },
+            program: {
+                type: String,
+                required: true
+            },
+            request: {
+                type: String,
+                required: true
+            },
+            forDay: {
+                type: String,
+                required: true
+            },
+            start: {
+                type: String,
+                required: true
+            },
+            end: {
                 type: String,
                 required: true
             },
             because: {
                 type: String,
                 required: true
+            }
+        },
+        parent: {
+            comment: {
+                type: String,
             },
-            registeredPersonQuantity: {
+            date: {
                 type: String,
                 required: true
+            }
+        },
+        advisor: {
+            comment: {
+                type: String
             },
-            addPersonQuantity: {
+            date: {
                 type: String,
                 required: true
+            }
+        },
+        lecturer: {
+            comment: {
+                type: String
             },
-            person: [{
-                type: mongoose.Schema.ObjectId,
-                ref: "User"
-            }]
+            date: {
+                type: String,
+                required: true
+            }
         },
         date: {
             type: String,
             required: true
-        },
-        advisorComment: {
-            comment:{
-                type: String
-            },
-            date: {
-                type: String,
-                required: true
-            }
-        },
-        professorComment: {
-            approve: {
-                type: Boolean,
-                default: true,
-                required: true
-            },
-            because: {
-                type: String
-            },
-            date: {
-                type: String,
-                required: true
-            }
-        },
-        registerOffice: {
-            request: {
-                type: Boolean,
-                default: true
-            },
-            because: {
-                type: String
-            },
-            date: {
-                type: String,
-                required: true
-            }
         }
     },
     {
@@ -91,4 +94,4 @@ const r16Schema = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('Documents', r16Schema)
+module.exports = mongoose.model('Documents', r23Schema)
