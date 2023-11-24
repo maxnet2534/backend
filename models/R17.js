@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const r17Schema = new mongoose.Schema(
     {
+        /*  */
         user: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
@@ -11,21 +12,26 @@ const r17Schema = new mongoose.Schema(
             type: String,
             required: true
         },
-        title: {
-            term: {
-                type: String,
-                required: true
-            },
-            year: {
-                type: String,
-                required: true
-            }
-        },
-        to: {
+        status: {
             type: String,
             required: true
         },
+        /*  */
         text: {    
+            title: {
+                term: {
+                    type: String,
+                    required: true
+                },
+                year: {
+                    type: String,
+                    required: true
+                }
+            },
+            to: {
+                type: String,
+                required: true
+            },
             gradYear: {
                 type: String,
                 required: true
@@ -87,26 +93,30 @@ const r17Schema = new mongoose.Schema(
                 required: true
             }
         },
+        /*  */
         date: {
             type: String,
             required: true
         },
+        /* cast 1 */
         advisor: {
             comment:{
                 type: String
             },
             date: {
-                type: String,
-                required: true
+                type: String
             }
         },
         headerDepartment: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             comment: {
                 type: String
             },
             date: {
-                type: String,
-                required: true
+                type: String
             },
             assignProfessor: {
                 type: mongoose.Schema.ObjectId,
@@ -114,6 +124,10 @@ const r17Schema = new mongoose.Schema(
             }
         },
         deanSubmit: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             request: {
                 type: Boolean
             },
@@ -121,7 +135,12 @@ const r17Schema = new mongoose.Schema(
                 type: String
             }
         },
+        /* cast 2 */
         toOtherDean: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             department: {
                 type: String
             },
@@ -130,6 +149,10 @@ const r17Schema = new mongoose.Schema(
             }
         },
         otherDeanSubmit: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             request: {
                 type: Boolean
             },
@@ -145,40 +168,36 @@ const r17Schema = new mongoose.Schema(
             }
         },
         deanOffice: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             request: {
-                type: Boolean,
-                default: true
+                type: Boolean
             },
             date: {
-                type: String,
-                required: true
+                type: String
             }
         },
         studentRequest: [{
             user: {
                 type: mongoose.Schema.ObjectId,
-                ref: "User",
-                required: true
+                ref: "User"
             },
             group: {
-                type: String,
-                required: true
+                type: String
             },
             grade: {
-                type: Number,
-                required: true
+                type: Number
             },
             whyType: {
-                type: String,
-                required: true
+                type: String
             },
             sumCredit: {
-                type: Number,
-                required: true
+                type: Number
             },
             endStudy: {
-                type: String,
-                required: true
+                type: String
             }
         }]
     },

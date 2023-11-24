@@ -44,7 +44,11 @@ const userSchema = new mongoose.Schema({
     tel: {
         type: String,
         required: true
-    }
+    },
+    document: [{
+        type: mongoose.Schema.ObjectId,
+        ref: "Document"
+    }]
 })
 
 module.exports = mongoose.model('User', userSchema)

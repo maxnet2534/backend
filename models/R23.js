@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const r23Schema = new mongoose.Schema(
     {
+        /*  */
         user: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
@@ -11,15 +12,20 @@ const r23Schema = new mongoose.Schema(
             type: String,
             required: true
         },
-        title: {
+        status: {
             type: String,
             required: true
         },
-        to: {
-            type: String,
-            required: true
-        },
+        /*  */
         text: {    
+            title: {
+                type: String,
+                required: true
+            },
+            to: {
+                type: String,
+                required: true
+            },
             theLecturerOf: {
                 type: String,
                 required: true
@@ -57,31 +63,37 @@ const r23Schema = new mongoose.Schema(
                 required: true
             }
         },
+        /*  */
         parent: {
             comment: {
-                type: String,
+                type: String
             },
             date: {
-                type: String,
-                required: true
+                type: String
             }
         },
         advisor: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             comment: {
                 type: String
             },
             date: {
-                type: String,
-                required: true
+                type: String
             }
         },
         lecturer: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             comment: {
                 type: String
             },
             date: {
-                type: String,
-                required: true
+                type: String
             }
         },
         date: {

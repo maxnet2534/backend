@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const r01Schema = new mongoose.Schema(
     {
+        /*  */
         user: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
@@ -11,27 +12,40 @@ const r01Schema = new mongoose.Schema(
             type: String,
             required: true
         },
-        title: {
-            type: String,
-            required: true
-        },
-        to: {
-            type: String,
-            required: true
-        },
-        wouldLikeTo: {
-            type: String,
-            required: true
-        },
         status: {
             type: String,
             required: true
         },
+        /*  */
+        text: {   
+            title: {
+                type: String,
+                required: true
+            },
+            to: {
+                type: String,
+                required: true
+            },
+            wouldLikeTo: {
+                type: String,
+                required: true
+            },
+            status: {
+                type: String,
+                required: true
+            },
+        },
+        /*  */
         date: {
             type: String,
             required: true
         },
+        /*  */
         advisor: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             comment:{
                 type: String
             },
@@ -41,40 +55,47 @@ const r01Schema = new mongoose.Schema(
             }
         },
         headDepartment: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             comment:{
                 type: String
             },
             date: {
-                type: String,
-                required: true
+                type: String
             }
         },
         deanConsideration: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             approve: {
                 type: Boolean,
-                default: true,
-                required: true
+                default: true
             },
             because:{
                 type: String
             }
         },
         registerOffice: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             request: {
-                type: Boolean,
-                default: true
+                type: Boolean
             },
             because: {
                 type: String
             },
             runtime: {
                 minute: {
-                    type: String,
-                    required: true
+                    type: String
                 },
                 day: {
-                    type: String,
-                    required: true
+                    type: String
                 }
             }
         }

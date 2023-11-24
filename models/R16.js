@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const r16Schema = new mongoose.Schema(
     {
+        /*  */
         user: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
@@ -11,11 +12,16 @@ const r16Schema = new mongoose.Schema(
             type: String,
             required: true
         },
-        to: {
+        status: {
             type: String,
             required: true
         },
+        /*  */
         text: {    
+            to: {
+                type: String,
+                required: true
+            },
             courseId: {
                 type: String,
                 required: true
@@ -45,11 +51,17 @@ const r16Schema = new mongoose.Schema(
                 ref: "User"
             }]
         },
+        /*  */
         date: {
             type: String,
             required: true
         },
+        /*  */
         advisorComment: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             comment:{
                 type: String
             },
@@ -59,6 +71,10 @@ const r16Schema = new mongoose.Schema(
             }
         },
         professorComment: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             approve: {
                 type: Boolean,
                 default: true,
@@ -73,6 +89,10 @@ const r16Schema = new mongoose.Schema(
             }
         },
         registerOffice: {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
             request: {
                 type: Boolean,
                 default: true
