@@ -98,7 +98,11 @@ const r17Schema = new mongoose.Schema(
             type: String,
             required: true
         },
-        /* cast 1 */
+        case: {
+            type: String,
+            required: true
+        },
+        /* case 1 */
         advisor: {
             comment:{
                 type: String
@@ -135,7 +139,7 @@ const r17Schema = new mongoose.Schema(
                 type: String
             }
         },
-        /* cast 2 */
+        /* case 2 */
         toOtherDean: {
             user: {
                 type: mongoose.Schema.ObjectId,
