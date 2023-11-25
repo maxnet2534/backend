@@ -1,28 +1,52 @@
-const Note = require('../models/Note')
-const User = require('../models/User')
-const asyncHandler = require('express-async-handler')
+const Document = require('../models/Document');
+const R01 = require('../models/R01');
+const R11 = require('../models/R11');
+const R16 = require('../models/R16');
+const R17 = require('../models/R17');
+const R23 = require('../models/R23');
+const User = require('../models/User');
+const asyncHandler = require('express-async-handler');
 
-// @desc Get all notes 
-// @route GET /notes
+// @desc Get all document
+// @route GET /document
 // @access Private
-const getAllNotes = asyncHandler(async (req, res) => {
-    // Get all notes from MongoDB
-    const notes = await Note.find().lean()
+const getAllDocuments = asyncHandler(async (req, res) => {
+    // Get all documents from MongoDB
+    const documents = await Document.find().lean();
 
-    // If no notes 
-    if (!notes?.length) {
-        return res.status(400).json({ message: 'No notes found' })
+    // If no documents 
+    if (!documents?.length) {
+        return res.status(400).json({ message: 'No documents found' });
     }
 
-    // Add username to each note before sending the response 
-    // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE 
+    const docType = documents.document.docType;
+    
+    // Add username to each document before sending the response 
+    // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE
     // You could also do this with a for...of loop
-    const notesWithUser = await Promise.all(notes.map(async (note) => {
-        const user = await User.findById(note.user).lean().exec()
-        return { ...note, username: user.username }
+    const documentsWithUser = await Promise.all(documents.map(async (document) => {
+        const user = await User.findById(document.document.user).select('-password').lean().exec();
+
+        if (docType === "R01") {
+            const doc = await R01.findById(document.document.doc).lean().exec();
+            return { ...document, user, doc };
+        } else if (docType === "R11") {
+            const doc = await R11.findById(document.document.doc).lean().exec();
+            return { ...document, user, doc };
+        } else if (docType === "R16") {
+            const doc = await R16.findById(document.document.doc).lean().exec();
+            return { ...document, user, doc };
+        } else if (docType === "R17") {
+            const doc = await R17.findById(document.document.doc).lean().exec();
+            return { ...document, user, doc };
+        } else if (docType === "R23") {
+            const doc = await R23.findById(document.document.doc).lean().exec();
+            return { ...document, user, doc };
+        }
+
     }))
 
-    res.json(notesWithUser)
+    res.json(documentsWithUser);
 })
 
 // @desc Create new note
@@ -116,7 +140,7 @@ const deleteNote = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
-    getAllNotes,
+    getAllDocuments,
     createNewNote,
     updateNote,
     deleteNote

@@ -125,4 +125,4 @@ const r11Schema = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('Documents', r11Schema)
+module.exports = mongoose.model('R11', r11Schema)

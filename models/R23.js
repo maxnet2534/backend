@@ -106,4 +106,4 @@ const r23Schema = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('Documents', r23Schema)
+module.exports = mongoose.model('R23', r23Schema)

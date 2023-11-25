@@ -104,4 +104,4 @@ const r01Schema = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('Documents', r01Schema)
+module.exports = mongoose.model('R01', r01Schema)

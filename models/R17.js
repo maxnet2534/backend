@@ -210,4 +210,4 @@ const r17Schema = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('Documents', r17Schema)
+module.exports = mongoose.model('R17', r17Schema)

@@ -107,4 +107,4 @@ const r16Schema = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('Documents', r16Schema)
+module.exports = mongoose.model('R16', r16Schema)
