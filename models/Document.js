@@ -6,14 +6,14 @@ const documentSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        user: {
+        userId: {
             type: mongoose.Schema.ObjectId,
             ref: "User",
             required: true
         },
-        doc: {
+        docId: {
             type: mongoose.Schema.ObjectId,
-            ref: docType,
+            ref: 'docType',
             required: true
         }
     }

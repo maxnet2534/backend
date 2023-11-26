@@ -19,29 +19,47 @@ const getAllDocuments = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'No documents found' });
     }
 
-    const docType = documents.document.docType;
     
     // Add username to each document before sending the response 
     // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE
     // You could also do this with a for...of loop
     const documentsWithUser = await Promise.all(documents.map(async (document) => {
-        const user = await User.findById(document.document.user).select('-password').lean().exec();
 
+        // query user collection
+        const userId = await User.findById(document.userId).select('-password').lean().exec();
+
+        // check docType
+        const docType = document.docType;
+
+        // query R01 document
         if (docType === "R01") {
-            const doc = await R01.findById(document.document.doc).lean().exec();
-            return { ...document, user, doc };
-        } else if (docType === "R11") {
-            const doc = await R11.findById(document.document.doc).lean().exec();
-            return { ...document, user, doc };
-        } else if (docType === "R16") {
-            const doc = await R16.findById(document.document.doc).lean().exec();
-            return { ...document, user, doc };
-        } else if (docType === "R17") {
-            const doc = await R17.findById(document.document.doc).lean().exec();
-            return { ...document, user, doc };
-        } else if (docType === "R23") {
-            const doc = await R23.findById(document.document.doc).lean().exec();
-            return { ...document, user, doc };
+            const docId = await R01.findById(document.docId).lean().exec();
+            return { ...document, userId, docId };
+        } 
+        
+
+        // query R11 document
+        if (docType === "R11") {
+            const docId = await R11.findById(document.docId).lean().exec();
+            return { ...document, userId, docId };
+        } 
+        
+        // query R16 document
+        if (docType === "R16") {
+            const docId = await R16.findById(document.docId).lean().exec();
+            return { ...document, userId, docId };
+        } 
+        
+        // query R17 document
+        if (docType === "R17") {
+            const docId = await R17.findById(document.docId).lean().exec();
+            return { ...document, userId, docId };
+        } 
+        
+        // query R23 document
+        if (docType === "R23") {
+            const docId = await R23.findById(document.docId).lean().exec();
+            return { ...document, userId, docId };
         }
 
     }))
@@ -49,32 +67,54 @@ const getAllDocuments = asyncHandler(async (req, res) => {
     res.json(documentsWithUser);
 })
 
-// @desc Create new note
-// @route POST /notes
+// @desc Create new document
+// @route POST /document
 // @access Private
-const createNewNote = asyncHandler(async (req, res) => {
-    const { user, title, text } = req.body
+const createNewDocument = asyncHandler(async (req, res) => {
+    const { docType } = req.body
 
     // Confirm data
-    if (!user || !title || !text) {
+    if (!docType) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
-    // Check for duplicate title
-    const duplicate = await Note.findOne({ title }).lean().exec()
+    if (docType === "R01") {
+        const { userId, title, to, wouldLikeTo } = req.body;
 
-    if (duplicate) {
-        return res.status(409).json({ message: 'Duplicate note title' })
+        // Confirm data
+        if (!userId || !docType || !title || !to || !wouldLikeTo) {
+            return res.status(400).json({ message: 'All fields are required' })
+        }
+
+        const user = User.findById(userId).exec()
+
+        // Check has a user
+        if (!user) {
+            return res.status(400).json({ message: 'User not found'});
+        }
+
+        // Create and store the new r01
+        const r01 = await R01.create({ 
+            user: userId,
+            docType, 
+            status: '0',
+            text:{title, to, wouldLikeTo}, 
+            date: new Date().toLocaleString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' }) 
+        })
+        // Create and store thr new document
+        const document = await Document.create({ docType, userId, docId: r01._id })
+
+        // return status
+        if (r01 && document) { // Created 
+            return res.status(201).json({ message: 'New document created' })
+        } else {
+            return res.status(400).json({ message: 'Invalid note data received' })
+        }
+
+    } else { // don't same any condition.
+        return res.status(400).json({ message: 'Invalid document data received' })
     }
 
-    // Create and store the new user 
-    const note = await Note.create({ user, title, text })
-
-    if (note) { // Created 
-        return res.status(201).json({ message: 'New note created' })
-    } else {
-        return res.status(400).json({ message: 'Invalid note data received' })
-    }
 
 })
 
@@ -141,7 +181,7 @@ const deleteNote = asyncHandler(async (req, res) => {
 
 module.exports = {
     getAllDocuments,
-    createNewNote,
+    createNewDocument,
     updateNote,
     deleteNote
 }

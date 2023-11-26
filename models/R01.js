@@ -29,11 +29,7 @@ const r01Schema = new mongoose.Schema(
             wouldLikeTo: {
                 type: String,
                 required: true
-            },
-            status: {
-                type: String,
-                required: true
-            },
+            }
         },
         /*  */
         date: {
@@ -72,7 +68,7 @@ const r01Schema = new mongoose.Schema(
             },
             approve: {
                 type: Boolean,
-                default: true
+                default: false
             },
             because:{
                 type: String

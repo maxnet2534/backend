@@ -67,11 +67,11 @@ const r17Schema = new mongoose.Schema(
                 }
             },
             oldCourse: {
-                year: {
+                oldYear: {
                     type: String,
                     required: true
                 },
-                term: {
+                oldTerm: {
                     type: String,
                     required: true
                 }
