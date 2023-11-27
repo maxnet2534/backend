@@ -8,7 +8,7 @@ const verifyJWT = require('../middleware/verifyJWT');
 router.route('/')
     .get(documentsController.getAllDocuments)
     .post(documentsController.createNewDocument)
-    .patch(documentsController.updateNote)
-    .delete(documentsController.deleteNote);
+    .patch(documentsController.updateDocument)
+    .delete(documentsController.deleteDocument);
 
 module.exports = router;

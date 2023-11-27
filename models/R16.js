@@ -39,16 +39,27 @@ const r16Schema = new mongoose.Schema(
                 required: true
             },
             registeredPersonQuantity: {
-                type: String,
+                type: Number,
                 required: true
             },
             addPersonQuantity: {
-                type: String,
+                type: Number,
                 required: true
             },
             person: [{
-                type: mongoose.Schema.ObjectId,
-                ref: "User"
+                userId: {
+                    type: mongoose.Schema.ObjectId,
+                    ref: "User",
+                    required: true
+                },
+                academicYear: {
+                    type: String,
+                    required: true
+                },
+                statusRegister: {
+                    type: String,
+                    required: true
+                }
             }]
         },
         /*  */

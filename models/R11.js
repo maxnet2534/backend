@@ -45,15 +45,15 @@ const r11Schema = new mongoose.Schema(
                 }
             }],
             preferredCourse: [{
-                courseCode: {
+                preCourseCode: {
                     type: String,
                     required: true
                 },
-                courseTitle: {
+                preCourseTitle: {
                     type: String,
                     required: true
                 },
-                credit:{
+                preCredit:{
                     type: String,
                     required: true
                 }

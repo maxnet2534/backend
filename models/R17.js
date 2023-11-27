@@ -80,11 +80,11 @@ const r17Schema = new mongoose.Schema(
                 type: String,
                 required: true
             },
-            faculty: {
+            courseFaculty: {
                 type: String,
                 required: true
             },
-            department: {
+            courseDepartment: {
                 type: String,
                 required: true
             },
@@ -98,10 +98,31 @@ const r17Schema = new mongoose.Schema(
             type: String,
             required: true
         },
-        case: {
+        statusCase: {
             type: String,
             required: true
         },
+        studentRequest: [{
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User"
+            },
+            group: {
+                type: String
+            },
+            grade: {
+                type: Number
+            },
+            whyType: {
+                type: String
+            },
+            sumCredit: {
+                type: Number
+            },
+            endStudy: {
+                type: String
+            }
+        }],
         /* case 1 */
         advisor: {
             comment:{
@@ -182,28 +203,7 @@ const r17Schema = new mongoose.Schema(
             date: {
                 type: String
             }
-        },
-        studentRequest: [{
-            user: {
-                type: mongoose.Schema.ObjectId,
-                ref: "User"
-            },
-            group: {
-                type: String
-            },
-            grade: {
-                type: Number
-            },
-            whyType: {
-                type: String
-            },
-            sumCredit: {
-                type: Number
-            },
-            endStudy: {
-                type: String
-            }
-        }]
+        }
     },
     {
         timestamps: true
